@@ -1,8 +1,8 @@
 import { View, Text, StyleSheet, SafeAreaView, Image, TextInput, TouchableOpacity } from 'react-native'
 import MapView, { Marker } from 'react-native-maps';
-import Geocoder from 'react-native-geocoding';
 import React, { useRef, useState } from 'react'
 import { COLORS } from '../constant';
+import SearchBox from 'react-native-search-box';
 
 const MapPage = () => {
   const [guide, setGuide] = useState([
@@ -13,27 +13,33 @@ const MapPage = () => {
     ,{ latitude: 27.695223, longitude: 85.323456 }
 ]);
 
+const [destination,setDestination] = useState();
 const [markers, setMarkers] = useState([]);
-const [destination, setDestination] = useState('');
 const mapRef = useRef(null);
-
-const handleSearch = async () => {
+const handleSearch = async (text) => {
   try {
-    const response = await Geocoder.from(destination, { provider: 'openstreetmap' });
-    const { lat, lng } = response.results[0].geometry.location;
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${text}`
+    );
+    const data = await response.json();
 
-    const newMarkers = [...markers, { latitude: lat, longitude: lng }];
-    setMarkers(newMarkers);
+    if (data && data.length > 0) {
+      const firstResult = data[0];
+      const newMarker = {
+        latitude: parseFloat(firstResult.lat),
+        longitude: parseFloat(firstResult.lon),
+      };
 
-    // Optionally, you can zoom to the new marker
-    mapRef.current.animateToRegion({
-      latitude: lat,
-      longitude: lng,
-      latitudeDelta: 0.1,
-      longitudeDelta: 0.1,
-    });
+      setMarkers([newMarker]);
+      mapRef.current.animateToRegion({
+        latitude: newMarker.latitude,
+        longitude: newMarker.longitude,
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1,
+      });
+    }
   } catch (error) {
-    console.error('Error during geocoding:', error.message);
+    console.error('Error searching location:', error);
   }
 };
 
@@ -43,18 +49,18 @@ const guideIcon = require('../assets/guide.png');
     <View style={styles.container}>
       <View style={styles.destiny}>
         <View style={{width:"80%",alignItems:'center',justifyContent:"center",gap:15,}}>
-          <TextInput  onChangeText={(text) => setDestination(text)} placeholder='Search Destination here!' style={{width:"100%",borderWidth:1,padding:10, borderRadius:25}}/>
-          <TouchableOpacity style={{borderWidth:1,padding: 10,borderRadius:25,alignSelf:"flex-end"}}onPress={handleSearch} >
-            <Text>Confirm</Text>
-          </TouchableOpacity>
+          <TextInput onChangeText={(text) => {setDestination(text);handleSearch(text);}} placeholder='Search Destination here!' style={{width:"100%",borderWidth:1,padding:10, borderRadius:25}}/>
         </View>
       </View>
       <View style={styles.map}>
         <MapView
-          ref={mapRef}
+        ref={mapRef}
           showsUserLocation={true}
-          style={styles.map} // Add onPress handler
+          style={styles.map}
         >
+          {markers.map((marker, id) => (
+          <Marker key={id} coordinate={marker} />
+        ))}
           {guide.map((marker, id) => (
             <Marker
               key={id}
