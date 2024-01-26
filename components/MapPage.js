@@ -4,7 +4,15 @@ import React, { useState } from 'react'
 import { COLORS } from '../constant';
 
 const MapPage = () => {
-  const [markers, setMarkers] = useState([{latitude: 27.693553,longitude: 85.321311, name: "new-marker"},{latitude: 27.693553,longitude: 85.321311, name: "new-marker"}]);
+  const [markers, setMarkers] = useState([
+    {latitude: 27.693553,longitude: 85.321311}
+    ,{ latitude: 27.695123, longitude: 85.322456 }
+    ,{ latitude: 26.695223, longitude: 85.321426 }
+    ,{ latitude: 27.695323, longitude: 85.320256 }
+    ,{ latitude: 27.695223, longitude: 85.323456 }
+]);
+
+const guideIcon = require('../assets/guide.png');
 
   return (
     <View style={styles.container}>
@@ -18,8 +26,9 @@ const MapPage = () => {
             <Marker
               key={id}
               coordinate={marker}
-              title={marker.name}
-            />
+            >
+              <Image source={guideIcon} style={{width:30,height:30}}/>
+            </Marker>
           ))}
         </MapView>
       </View>

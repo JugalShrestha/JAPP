@@ -40,7 +40,7 @@ export default function App() {
         },
         tabBarIcon: ({ focused })=>{
           let iconName;
-          let opacity = focused ?  0.2:1 ;
+          let opacity = focused ?  1:.2 ;
           let size= focused? 35:24;
 
             if (route.name === 'Map') {
