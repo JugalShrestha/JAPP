@@ -4,7 +4,7 @@ import React from 'react'
 const TranslatePage = () => {
   return (
     <View style={styles.container}>
-      <Text>TranslatePage</Text>
+      <View style={styles.camera}><Text>This is camera</Text></View>
     </View>
   )
 }
@@ -15,6 +15,11 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    camera:{
+      width:"90%",
+      height: 70,
+      backgroundColor: "red",
+    }
   });
 
 export default TranslatePage
