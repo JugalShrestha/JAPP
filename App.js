@@ -5,6 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import { COLORS } from './constant';
 import * as Location from 'expo-location';
 import { useEffect } from 'react';
+import { View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -37,8 +38,10 @@ export default function App() {
         tabBarStyle: {
           backgroundColor: COLORS.p1,
         },
-        tabBarIcon: ()=>{
+        tabBarIcon: ({ focused })=>{
           let iconName;
+          let opacity = focused ?  0.2:1 ;
+          let size= focused? 35:24;
 
             if (route.name === 'Map') {
               iconName = "compass";
@@ -47,7 +50,9 @@ export default function App() {
             }else if (route.name === 'Profile') {
               iconName = "user";
             }
-            return <Feather name={iconName} size={24} color="black" />
+            return <View style={{ opacity, padding: 2, borderRadius: 20 }}>
+            <Feather name={iconName} size={size} color="black" />
+          </View>
         }
       })}>
         <Tab.Screen name="Translate" component={TranslatePage}/>

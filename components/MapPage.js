@@ -3,35 +3,30 @@ import MapView, { Marker } from 'react-native-maps';
 import React, { useState } from 'react'
 import { COLORS } from '../constant';
 
-const MapPage = () => { 
-  
-  const markers = [
-    {
-      latitude: 27.693639,
-      longitude: 85.321050,
-      latitudeDelta: 0.01,
-      longitudeDelta: 0.01,
-      name: "hellow",
-    }
-  ]
+const MapPage = () => {
+  const [markers, setMarkers] = useState([{latitude: 27.693553,longitude: 85.321311, name: "new-marker"},{latitude: 27.693553,longitude: 85.321311, name: "new-marker"}]);
 
   return (
     <View style={styles.container}>
-      <View style={styles.scrollBar}>
-      </View>
+      <View style={styles.scrollBar}></View>
       <View style={styles.map}>
-        <MapView showsUserLocation={true} style={styles.map} showsMyLocationButton/>
-        {markers.map((marker,id) => (
+        <MapView
+          showsUserLocation={true}
+          style={styles.map} // Add onPress handler
+        >
+          {markers.map((marker, id) => (
             <Marker
               key={id}
               coordinate={marker}
               title={marker.name}
             />
           ))}
+        </MapView>
       </View>
     </View>
-  )
-}
+  );
+};
+
 
 const styles = StyleSheet.create({
     container: {
