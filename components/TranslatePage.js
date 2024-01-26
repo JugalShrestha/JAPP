@@ -1,11 +1,15 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { COLORS } from '../constant';
+import { Camera } from 'expo-camera';
+import { ImagePicker } from 'expo-image-picker';
+import { recognizeAndTranslate } from 'react-native-tesseract-ocr';
+import CameraComponent from './CameraComponent';
 
 const TranslatePage = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.camera}><View style={styles.capture}></View></View>
+      <View style={styles.camera}><CameraComponent/><View style={styles.capture}></View></View>
       <View style={styles.left}></View>
       <View style={styles.right}></View>
     </View>

@@ -2,20 +2,33 @@ import { View, Text, StyleSheet, SafeAreaView, Image, TextInput, TouchableOpacit
 import MapView, { Marker } from 'react-native-maps';
 import React, { useRef, useState } from 'react'
 import { COLORS } from '../constant';
-import SearchBox from 'react-native-search-box';
 
 const MapPage = () => {
-  const [guide, setGuide] = useState([
-    {latitude: 27.693553,longitude: 85.321311}
-    ,{ latitude: 27.695123, longitude: 85.322456 }
-    ,{ latitude: 26.695223, longitude: 85.321426 }
-    ,{ latitude: 27.695323, longitude: 85.320256 }
-    ,{ latitude: 27.695223, longitude: 85.323456 }
-]);
-
+const [confirm,setConfirm] = useState(false);
+const [guide,setGuide] = useState([]);
 const [destination,setDestination] = useState();
 const [markers, setMarkers] = useState([]);
 const mapRef = useRef(null);
+
+const generateRandomGuides = (centerLocation) => {
+  const numGuides = 5; // You can adjust the number of random guides
+  const randomGuides = [];
+
+  for (let i = 0; i < numGuides; i++) {
+    const latOffset = Math.random() * 0.02 - 0.01; // Adjust the range of random offset
+    const lonOffset = Math.random() * 0.02 - 0.01;
+
+    const randomGuide = {
+      latitude: centerLocation.latitude + latOffset,
+      longitude: centerLocation.longitude + lonOffset,
+    };
+
+    randomGuides.push(randomGuide);
+  }
+
+  return randomGuides;
+};
+
 const handleSearch = async (text) => {
   try {
     const response = await fetch(
@@ -37,19 +50,29 @@ const handleSearch = async (text) => {
         latitudeDelta: 0.1,
         longitudeDelta: 0.1,
       });
+      const randomGuides = generateRandomGuides(newMarker);
+      setGuide(randomGuides);
     }
   } catch (error) {
     console.error('Error searching location:', error);
   }
 };
 
+const handleConfirm = () =>{
+  setTimeout(()=>{
+    setConfirm(!confirm);
+  },1000)
+}
+
 const guideIcon = require('../assets/guide.png');
 
   return (
     <View style={styles.container}>
       <View style={styles.destiny}>
+      <View style={styles.loader}></View>
         <View style={{width:"80%",alignItems:'center',justifyContent:"center",gap:15,}}>
-          <TextInput onChangeText={(text) => {setDestination(text);handleSearch(text);}} placeholder='Search Destination here!' style={{width:"100%",borderWidth:1,padding:10, borderRadius:25}}/>
+          <TextInput onChangeText={(text) => {setDestination(text);handleSearch(text);}} placeholder='Search Destination here!' style={{width:"100%",borderWidth:1,padding:10, borderRadius:5}}/>
+          <TouchableOpacity onPress={handleConfirm} style={{padding:10,borderWidth:1, width: "100%", borderRadius:5, backgroundColor: COLORS.s1, alignItems:"center"}}><Text style={{color:COLORS.p1, fontWeight: "bold"}}>{confirm?"cancel":"confirm"}</Text></TouchableOpacity>
         </View>
       </View>
       <View style={styles.map}>
@@ -59,16 +82,13 @@ const guideIcon = require('../assets/guide.png');
           style={styles.map}
         >
           {markers.map((marker, id) => (
-          <Marker key={id} coordinate={marker} />
+          <Marker key={id} coordinate={marker}/>
         ))}
-          {guide.map((marker, id) => (
-            <Marker
-              key={id}
-              coordinate={marker}
-            >
-              <Image source={guideIcon} style={{width:30,height:30}}/>
-            </Marker>
-          ))}
+        {confirm && guide.map((marker, id) => (
+          <Marker key={id} coordinate={marker}>
+            <Image source={guideIcon} style={{ width: 30, height: 30 }} />
+          </Marker>
+        ))}
         </MapView>
       </View>
     </View>
@@ -88,7 +108,7 @@ const styles = StyleSheet.create({
       width: "100%",
       position: "absolute",
       bottom: 0,
-      height: "20%",
+      height: 160,
       zIndex: 2,
       alignItems: "center",
       gap: 25,
@@ -103,6 +123,13 @@ const styles = StyleSheet.create({
       top: 15,
       width:"100%",
       height: "100%",
+    },
+    loader:{
+      width:"0%",
+      backgroundColor: COLORS.s1,
+      top: 0,
+      padding: 0,
+      position: "absolute",
     }
   });
 
