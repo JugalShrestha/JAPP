@@ -1,16 +1,34 @@
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
-import MapView from 'react-native-maps';
-import React from 'react'
+import { View, Text, StyleSheet, SafeAreaView, Image } from 'react-native'
+import MapView, { Marker } from 'react-native-maps';
+import React, { useState } from 'react'
 import { COLORS } from '../constant';
 
-const MapPage = () => {
+const MapPage = () => { 
+  
+  const markers = [
+    {
+      latitude: 27.693639,
+      longitude: 85.321050,
+      latitudeDelta: 0.01,
+      longitudeDelta: 0.01,
+      name: "hellow",
+    }
+  ]
+
   return (
     <View style={styles.container}>
       <View style={styles.scrollBar}>
       </View>
       <View style={styles.map}>
-        <MapView showsUserLocation={true} style={styles.map}/>
-      </View>{/*for maps*/}
+        <MapView showsUserLocation={true} style={styles.map} showsMyLocationButton/>
+        {markers.map((marker,id) => (
+            <Marker
+              key={id}
+              coordinate={marker}
+              title={marker.name}
+            />
+          ))}
+      </View>
     </View>
   )
 }

@@ -4,7 +4,7 @@ import React from 'react'
 const TranslatePage = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.camera}><Text>This is camera</Text></View>
+      <View style={styles.camera}><Text>this is something</Text></View>
     </View>
   )
 }
