@@ -9,7 +9,7 @@ import CameraComponent from './CameraComponent';
 const TranslatePage = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.camera}><CameraComponent/><View style={styles.capture}></View></View>
+      <View style={styles.camera}><CameraComponent/></View>
       <View style={styles.left}></View>
       <View style={styles.right}></View>
     </View>

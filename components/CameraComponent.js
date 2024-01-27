@@ -1,15 +1,12 @@
-// CameraComponent.js
-import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useRef, useState, useEffect } from 'react';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
-import { ImagePicker } from 'expo-image-picker';
-import { recognizeAndTranslate } from './OCRTranslator';
+import { COLORS } from '../constant';
 
 const CameraComponent = () => {
   const cameraRef = useRef(null);
-  const [imageUri, setImageUri] = useState(null);
   const [hasPermission, setHasPermission] = useState(null);
-  
+
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestPermissionsAsync();
@@ -17,38 +14,47 @@ const CameraComponent = () => {
     })();
   }, []);
 
-  const takePicture = async () => {
-    if (cameraRef.current) {
-      const photo = await cameraRef.current.takePictureAsync();
-      setImageUri(photo.uri);
-      recognizeAndTranslate(photo.uri);
-    }
-  };
+  if (hasPermission === null) {
+    return <View />;
+  }
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.cancelled) {
-      setImageUri(result.uri);
-      recognizeAndTranslate(result.uri);
-    }
-  };
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
 
   return (
-    <View>
-      <Camera ref={cameraRef} style={{ width: "100%",height: "100%" }} type={Camera.Constants.Type.back}/>
-      <TouchableOpacity onPress={takePicture}>
-        <Text>Take Picture</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={pickImage}>
-        <Text>Pick Image</Text>
-      </TouchableOpacity>
-    </View>
+      <Camera style={{ width: "100%", height: "100%"}} type={Camera.Constants.Type.back} ref={cameraRef}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: 'transparent',
+            flexDirection: 'row',
+          }}
+        >
+          <TouchableOpacity
+            style={{
+                backgroundColor: "red",
+                width:50,
+                height:50,
+                borderRadius: 100,
+                borderWidth: 5,
+                borderColor: COLORS.p1,
+                position: 'absolute',
+                bottom: -20,
+                right: "45%",
+            }}
+            onPress={async () => {
+              if (cameraRef.current) {
+                const photo = await cameraRef.current.takePictureAsync();
+                console.log(photo);
+              }
+            }}
+          >
+            <Text style={{}}>
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </Camera>
   );
 };
 
