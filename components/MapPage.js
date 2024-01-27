@@ -127,7 +127,7 @@ const guideIcon = require('../assets/guide.png');
               <TextInput onChangeText={(text) => {setDestination(text)}} placeholder='Search Destination here!' style={{width:"75%",borderWidth:1,padding:10, borderRadius:5}}/>
               <TouchableOpacity onPress={()=>handleSearch(destination)} style={{borderWidth:1,borderRadius:5,alignItems:"center",justifyContent:"center",padding:15}}><Text>Search</Text></TouchableOpacity>
             </View>}
-            <TouchableOpacity onPress={handleConfirm} style={{padding:10,borderWidth:1, width: "100%", borderRadius:5, backgroundColor: COLORS.s1, alignItems:"center"}}><Text style={{color:COLORS.p1, fontWeight: "bold"}}>{confirm?"cancel":"confirm"}</Text></TouchableOpacity>
+            <TouchableOpacity onPress={handleConfirm} style={{padding:10, width: "100%", borderRadius:5, backgroundColor: COLORS.n1, alignItems:"center"}}><Text style={{color:COLORS.p1, fontWeight: "bold", textTransform:"uppercase"}}>{confirm?"cancel":"confirm destination"}</Text></TouchableOpacity>
           </View>
         </View>
       }

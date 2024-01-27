@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { Image } from "react-native";
-import { MapPage, TranslatePage, UserPage, LoginScreen } from './components';
+import { MapPage, Advertisements, UserPage, LoginScreen } from './components';
 import { Feather } from '@expo/vector-icons';
 import { COLORS } from './constant';
 import * as Location from 'expo-location';
@@ -108,8 +108,8 @@ export default function App() {
 
             if (route.name === 'Map') {
               iconName = "compass";
-            } else if (route.name === 'Translate') {
-              iconName = "camera";
+            } else if (route.name === 'advertisement') {
+              iconName = "star";
             }else if (route.name === 'Profile') {
               iconName = "user";
             }
@@ -118,8 +118,8 @@ export default function App() {
           </View>
         }
       })}>
-        <Tab.Screen name="Translate" component={TranslatePage}/>
-        <Tab.Screen name="Map" component={MapPage}/>
+      <Tab.Screen name="Map" component={MapPage}/>
+        <Tab.Screen name="advertisement" component={Advertisements}/>
         <Tab.Screen name="Profile" component={UserPage}/>
       </Tab.Navigator>): (
         <>
