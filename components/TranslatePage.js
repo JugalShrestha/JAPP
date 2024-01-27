@@ -3,7 +3,6 @@ import React from 'react'
 import { COLORS } from '../constant';
 import { Camera } from 'expo-camera';
 import { ImagePicker } from 'expo-image-picker';
-import { recognizeAndTranslate } from 'react-native-tesseract-ocr';
 import CameraComponent from './CameraComponent';
 
 const TranslatePage = () => {

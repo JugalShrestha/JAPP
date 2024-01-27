@@ -1,12 +1,63 @@
-import { View, Text, StyleSheet, SafeAreaView, Image, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, Animated, Easing} from 'react-native'
 import MapView, { Marker } from 'react-native-maps';
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { COLORS } from '../constant';
+import GuidePage from './GuidePage';
+
+const LoadingBar = () => {
+  const [animation] = useState(new Animated.Value(0));
+  const [showGuidePage, setShowGuidePage] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowGuidePage(true);
+    }, 2000);
+
+    // Clear the timeout when the component unmounts or when it's no longer needed
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  useEffect(() => {
+    const animateLoadingBar = () => {
+      Animated.loop(
+        Animated.timing(animation, {
+          toValue: 1,
+          duration: 2000, // Adjust the duration as needed
+          easing: Easing.linear,
+          useNativeDriver: false,
+        })
+      ).start();
+    };
+
+    animateLoadingBar();
+  }, [animation]);
+
+  const widthInterpolate = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0%', '100%'],
+  });
+
+  const animatedStyles = {
+    width: widthInterpolate,
+  };
+
+  return (
+    <View style={styles.container1}>
+      {showGuidePage ? <GuidePage />:<Animated.View style={[styles.loadingBar, animatedStyles]}>
+        <Text style={styles.loadingText}>Locating guides...</Text>
+      </Animated.View>}
+    </View>
+  );
+};
+
+const Searching = () =>{
+  return <LoadingBar/>
+}
 
 const MapPage = () => {
-const [confirm,setConfirm] = useState(false);
-const [guide,setGuide] = useState([]);
-const [destination,setDestination] = useState();
+const [confirm, setConfirm] = useState(false);
+const [guide, setGuide] = useState({stars:5,description:"Something description",name:"Guider Guider",guided:2,});
+const [destination, setDestination] = useState();
 const [markers, setMarkers] = useState([]);
 const mapRef = useRef(null);
 
@@ -68,20 +119,26 @@ const guideIcon = require('../assets/guide.png');
 
   return (
     <View style={styles.container}>
-      <View style={styles.destiny}>
-      <View style={styles.loader}></View>
-        <View style={{width:"80%",alignItems:'center',justifyContent:"center",gap:15,}}>
-          <TextInput onChangeText={(text) => {setDestination(text);handleSearch(text);}} placeholder='Search Destination here!' style={{width:"100%",borderWidth:1,padding:10, borderRadius:5}}/>
-          <TouchableOpacity onPress={handleConfirm} style={{padding:10,borderWidth:1, width: "100%", borderRadius:5, backgroundColor: COLORS.s1, alignItems:"center"}}><Text style={{color:COLORS.p1, fontWeight: "bold"}}>{confirm?"cancel":"confirm"}</Text></TouchableOpacity>
+      {
+        <View style={styles.destiny}>
+        <View style={styles.loader}></View>
+          <View style={{width:"80%",height:"100%",alignItems:'center',justifyContent:"space-evenly"}}>
+            {confirm?<Searching/>:<View style={{width:"100%",flexDirection:"row",alignItems:"center",justifyContent:"space-between"}}>
+              <TextInput onChangeText={(text) => {setDestination(text)}} placeholder='Search Destination here!' style={{width:"70%",borderWidth:1,padding:10, borderRadius:5}}/>
+              <TouchableOpacity onPress={()=>handleSearch(destination)} style={{borderWidth:1,borderRadius:5,alignItems:"center",justifyContent:"center",padding:15}}><Text>Search</Text></TouchableOpacity>
+            </View>}
+            <TouchableOpacity onPress={handleConfirm} style={{padding:10,borderWidth:1, width: "100%", borderRadius:5, backgroundColor: COLORS.s1, alignItems:"center"}}><Text style={{color:COLORS.p1, fontWeight: "bold"}}>{confirm?"cancel":"confirm"}</Text></TouchableOpacity>
+          </View>
         </View>
-      </View>
+      }
+      <View style={styles.guideMap}></View>
       <View style={styles.map}>
         <MapView
         ref={mapRef}
           showsUserLocation={true}
           style={styles.map}
         >
-          {markers.map((marker, id) => (
+        {markers.map((marker, id) => (
           <Marker key={id} coordinate={marker}/>
         ))}
         {confirm && guide.map((marker, id) => (
@@ -95,7 +152,6 @@ const guideIcon = require('../assets/guide.png');
   );
 };
 
-
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -104,14 +160,28 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       position: 'relative', 
     },
+    container1: {
+      width:"100%",
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    loadingBar: {
+      height: 20,
+      backgroundColor: COLORS.s1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 5,
+    },
+    loadingText: {
+      color: COLORS.p1, // Adjust the color as needed
+    },
     destiny:{
       width: "100%",
       position: "absolute",
       bottom: 0,
-      height: 160,
+      padding:20,
       zIndex: 2,
       alignItems: "center",
-      gap: 25,
       justifyContent: "center",
       backgroundColor: COLORS.p1,
       borderTopWidth: 1,

@@ -1,15 +1,22 @@
 import { NavigationContainer } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { MapPage, TranslatePage, UserPage } from './components';
+import { GuidePage, MapPage, TranslatePage, UserPage } from './components';
 import { Feather } from '@expo/vector-icons';
 import { COLORS } from './constant';
 import * as Location from 'expo-location';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [guide, setGuide] = useState([{
+    name: 'John Doe',
+    profileImage: require('./assets/guide.png'), // Add an image for the guide
+    description: 'Experienced guide ready to assist you on your journey.',
+    guided: "2",
+  }]);
+
   useEffect(() => {
     const requestLocationPermission = async () => {
       try {

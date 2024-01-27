@@ -5,20 +5,13 @@ import { COLORS } from '../constant';
 
 const CameraComponent = () => {
   const cameraRef = useRef(null);
-  const [hasPermission, setHasPermission] = useState(null);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
-
-  if (hasPermission === null) {
+  if (permission === null) {
     return <View />;
   }
 
-  if (hasPermission === false) {
+  if (permission === false) {
     return <Text>No access to camera</Text>;
   }
 
@@ -50,8 +43,6 @@ const CameraComponent = () => {
               }
             }}
           >
-            <Text style={{}}>
-            </Text>
           </TouchableOpacity>
         </View>
       </Camera>
