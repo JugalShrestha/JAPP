@@ -13,7 +13,7 @@ const UserPage = () => {
       <View style={styles.imageContainer}>
           <Image
             style={styles.img}
-            source={require('../assets/compass.png')}
+            source={require('../assets/profile.png')}
           />
         </View>
       </View>
@@ -47,14 +47,14 @@ const UserPage = () => {
       <View style={styles.settings}>
           <Image
             style={styles.img2}
-            source={require('../assets/compass.png')}
+            source={require('../assets/settings.webp')}
           />
           <Text style={styles.infodata2}>Settings</Text>
         </View>
         <View style={styles.settings}>
           <Image
             style={styles.img3}
-            source={require('../assets/compass.png')}
+            source={require('../assets/prof.jpg')}
           />
           <Text style={styles.infodata2}>Edit Profile</Text>
         </View>
