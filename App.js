@@ -13,8 +13,52 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useEffect, useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
 const Tab = createBottomTabNavigator();
+
+const SignUpPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const auth = getAuth();
+
+  const handleSignUp = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // User signed up successfully
+        const user = userCredential.user;
+        console.log('User signed up:', user);
+        // You can navigate to another screen or perform additional actions here
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Signup error:', errorCode, errorMessage);
+        // Handle errors, such as displaying them to the user
+      });
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Sign Up</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        secureTextEntry
+        value={password}
+        onChangeText={(text) => setPassword(text)}
+      />
+      <Button title="Sign Up" onPress={handleSignUp} />
+    </View>
+  );
+};
 
 export default function App() {
   
@@ -37,10 +81,8 @@ export default function App() {
 
         if (status === 'granted') {
           console.log('Foreground location permission granted');
-          // Now you can use Expo Location APIs
         } else {
           console.log('Foreground location permission denied');
-          // Handle the case where the user denies location permission
         }
       } catch (error) {
         console.error('Error requesting foreground location permission:', error);
@@ -92,7 +134,7 @@ export default function App() {
                   <View style={styles.imageContainer}>
                     <Image
                       style={styles.img}
-                      source={require("./assets/demologo.jpg")}
+                      source={require("./assets/demologo.png")}
                     />
                   </View>
 
@@ -156,7 +198,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {},
   img: {
-    height: 150,
-    width: 150,
+    height: 300,
+    width: 300,
   },
 });

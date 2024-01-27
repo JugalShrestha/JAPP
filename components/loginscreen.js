@@ -1,6 +1,8 @@
 // LoginScreen.js
 import React, { useEffect, useState } from "react";
-import { View, TextInput, Button, StyleSheet, Modal, Text } from "react-native";
+import { View, TextInput, Button, StyleSheet, Modal, Text, TouchableOpacity } from "react-native";
+import { COLORS } from "../constant";
+import { Image } from "react-native-elements";
 const LoginScreen = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -18,9 +20,8 @@ const LoginScreen = ({ setIsLoggedIn }) => {
   return (
     <>
       <View style={styles.modalContainer}>
-        <View style={styles.loginbox}></View>
+        <Image source={require("../assets/demologo.png")} style={{width:300,height:220}}/>
         <View style={styles.container}>
-          <Text style={styles.logintitle}>Login to LocalGuide</Text>
           <TextInput
             placeholder="Username"
             value={username}
@@ -34,13 +35,11 @@ const LoginScreen = ({ setIsLoggedIn }) => {
             secureTextEntry
             style={styles.input}
           />
-          <Button title="Login" onPress={handleLogin} />
-          <View style={styles.signupbox}>
-            <Text style={styles.signup}>
-              Don't have an account?Sign up here.
-            </Text>
+          <View style={{flexDirection: "row",gap:10,alignItems:"center",justifyContent:"center"}}>
+            <Text style={{}}>Don't have an account?</Text><Text style={{padding:15,backgroundColor:COLORS.s2,borderRadius:25}}>Sign up!</Text>
           </View>
         </View>
+          <TouchableOpacity style={{width: "80%",}} onPress={handleLogin}><Text style={{padding:15,backgroundColor:COLORS.n1,borderRadius:20,fontSize:15,textTransform:"uppercase",fontWeight:"bold",color:COLORS.p1,paddingLeft:25,paddingRight:25,alignSelf:"flex-end"}}>Login</Text></TouchableOpacity>
       </View>
     </>
   );
@@ -48,25 +47,28 @@ const LoginScreen = ({ setIsLoggedIn }) => {
 
 const styles = StyleSheet.create({
   modalContainer: {
-    flex: 1,
-    justifyContent: "flex-end", // Align to the bottom
-    backgroundColor: "white", // Set a background color if needed
-    marginBottom: 120,
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    backgroundColor: "white", 
     alignItems: "center",
+    gap: 25,
   },
   container: {
-    flex: 5.6,
+    width: "80%",
+    padding: 35,
+    borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
+    gap: 25,
+    backgroundColor: COLORS.n1,
   },
   input: {
-    height: 60,
-    width: 300,
-    borderColor: "gray",
+    width: "100%",
+    padding: 15,
+    backgroundColor: COLORS.s2,
     borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 20,
-    paddingLeft: 10,
+    borderRadius: 25,
   },
   loginbox: {
     display: "flex",
