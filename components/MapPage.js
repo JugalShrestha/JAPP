@@ -122,9 +122,9 @@ const guideIcon = require('../assets/guide.png');
       {
         <View style={styles.destiny}>
         <View style={styles.loader}></View>
-          <View style={{width:"80%",height:"100%",alignItems:'center',justifyContent:"space-evenly"}}>
-            {confirm?<Searching/>:<View style={{width:"100%",flexDirection:"row",alignItems:"center",justifyContent:"space-between"}}>
-              <TextInput onChangeText={(text) => {setDestination(text)}} placeholder='Search Destination here!' style={{width:"70%",borderWidth:1,padding:10, borderRadius:5}}/>
+          <View style={{width:"95%",height:"100%",alignItems:'center',justifyContent:"center",gap:10,}}>
+            {confirm?<Searching/>:<View style={{width:"100%",flexDirection:"row",alignItems:"center",gap:10}}>
+              <TextInput onChangeText={(text) => {setDestination(text)}} placeholder='Search Destination here!' style={{width:"75%",borderWidth:1,padding:10, borderRadius:5}}/>
               <TouchableOpacity onPress={()=>handleSearch(destination)} style={{borderWidth:1,borderRadius:5,alignItems:"center",justifyContent:"center",padding:15}}><Text>Search</Text></TouchableOpacity>
             </View>}
             <TouchableOpacity onPress={handleConfirm} style={{padding:10,borderWidth:1, width: "100%", borderRadius:5, backgroundColor: COLORS.s1, alignItems:"center"}}><Text style={{color:COLORS.p1, fontWeight: "bold"}}>{confirm?"cancel":"confirm"}</Text></TouchableOpacity>
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
       width: "100%",
       position: "absolute",
       bottom: 0,
-      padding:20,
+      padding: 20,
       zIndex: 2,
       alignItems: "center",
       justifyContent: "center",

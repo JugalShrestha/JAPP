@@ -1,8 +1,8 @@
 const COLORS = {
-    p1: "white",
-    p2: "black",
-    s1: "red",
-    s2: "blue",
+    p1: "#F5F5F5",
+    p2: "#CCC1C1",
+    s1: "#000000",
+    s2: "#414041",
 }
 
 export {COLORS};
