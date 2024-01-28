@@ -5,6 +5,7 @@ import { MapPage, Advertisements, UserPage, LoginScreen, Sos } from './component
 import { Feather } from '@expo/vector-icons';
 import { COLORS } from './constant';
 import * as Location from 'expo-location';
+import Noti from './components/noti';
 import {
   Modal,
   StyleSheet,
@@ -91,6 +92,8 @@ export default function App() {
 
     requestLocationPermission();
   }, []);
+
+  Noti();
 
   return (
     <NavigationContainer>

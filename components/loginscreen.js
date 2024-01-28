@@ -8,8 +8,7 @@ const LoginScreen = ({ setIsLoggedIn }) => {
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    // Add your login logic here, e.g., validate credentials
-    if (username === "admin" && password === "admin") {
+    if (username === "admin" && password === "admin1") {
       alert("Login successful!");
       setIsLoggedIn(true);
     } else {
