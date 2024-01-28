@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { Image } from "react-native";
-import { MapPage, Advertisements, UserPage, LoginScreen } from './components';
+import { MapPage, Advertisements, UserPage, LoginScreen, Sos } from './components';
 import { Feather } from '@expo/vector-icons';
 import { COLORS } from './constant';
 import * as Location from 'expo-location';
@@ -112,7 +112,9 @@ export default function App() {
               iconName = "star";
             }else if (route.name === 'Profile') {
               iconName = "user";
-            }
+            }else if (route.name === 'Sos') {
+            iconName = "bell";
+          }
             return <View style={{ opacity, padding: 2, borderRadius: 20 }}>
             <Feather name={iconName} size={size} color="black" />
           </View>
@@ -121,6 +123,7 @@ export default function App() {
       <Tab.Screen name="Map" component={MapPage}/>
         <Tab.Screen name="advertisement" component={Advertisements}/>
         <Tab.Screen name="Profile" component={UserPage}/>
+        <Tab.Screen name="Sos" component={Sos}/>
       </Tab.Navigator>): (
         <>
           {modalOpen && (

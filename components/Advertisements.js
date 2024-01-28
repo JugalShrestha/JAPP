@@ -6,51 +6,55 @@ import { COLORS } from '../constant';
 
 const Advertisements = () => {
     
-
 const DATA = [
     {
       id: 'a1',
-      title: 'carasol-1.jpg',
+      image: require("../assets/carasol-1.jpg"),
+      location: "sagarmatha",
+      
     },
     {
       id: 'a2',
-      title: 'carasol-2.jpg',
+      image: require("../assets/pic1.jpg"),
+      location: "himalayan Java coffee",
     },
     {
       id: 'a3',
-      title: 'carasol-1.jpg',
+      image: require("../assets/pic2.jpg"),
+      location: "mountain",
     },
     {
       id: 'a4',
-      title: 'carasol-1.jpg',
+      image: require("../assets/carasol-1.jpg"),
     },
     {
       id: 'a5',
-      title: 'carasol-1.jpg',
+      image: require("../assets/carasol-1.jpg"),
     },
     {
       id: 'a6',
-      title: 'carasol-1.jpg',
+      image: require("../assets/carasol-1.jpg"),
     },
     {
       id: 'a7',
-      title: 'carasol-1.jpg',
+      image: require("../assets/carasol-1.jpg"),
     },
     {
       id: 'a8',
-      title: 'carasol-1.jpg',
+      image: require("../assets/carasol-1.jpg"),
     },
     {
       id: 'a9',
-      title: 'carasol-1.jpg',
+      image: require("../assets/carasol-1.jpg"),
     },
   ];
   
-  const Item = ({ title }) => (
-    <View style={{ padding: 25, backgroundColor: 'red', marginHorizontal: 10 }}>
-      <Text>{title}</Text>
+  const Item = ({ image }) => {
+    return (
+    <View style={{ width: 200, height:100,backgroundColor: COLORS.n1, marginHorizontal: 10 }}>
+      <Image source={image} style={{width: "100%",height:"100%"}}/>
     </View>
-  );
+  )};
   return (
     <View style={{width:"100%",height:"100%",alignItems:"center",justifyContent:"flex-end"}}>
         <MapView showsUserLocation={true} showsMyLocationButton={true} style={{width:"100%",height:"100%"}}/>
@@ -60,7 +64,7 @@ const DATA = [
                 <FlatList
                 data={DATA}
                 horizontal
-                renderItem={({item})=><Item style={{padding:25,backgroundColor:COLORS.n1}} title={item.title}/>}
+                renderItem={({item})=><Item style={{padding:25,backgroundColor:COLORS.n1}} image={item.image}/>}
                 keyExtractor={item=>item.id}
                 />
             </View>
@@ -71,7 +75,7 @@ const DATA = [
                 <FlatList
                 data={DATA}
                 horizontal
-                renderItem={({item})=><Item style={{padding:25,backgroundColor:COLORS.n1}} title={item.title}/>}
+                renderItem={({item})=><Item style={{padding:25,backgroundColor:COLORS.n1}} image={item.image}/>}
                 keyExtractor={item=>item.id}
                 />
             </View>

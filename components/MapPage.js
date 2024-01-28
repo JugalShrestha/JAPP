@@ -11,7 +11,7 @@ const LoadingBar = () => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setShowGuidePage(true);
-    }, 2000);
+    }, 3000);
 
     // Clear the timeout when the component unmounts or when it's no longer needed
     return () => clearTimeout(timeoutId);
@@ -22,7 +22,7 @@ const LoadingBar = () => {
       Animated.loop(
         Animated.timing(animation, {
           toValue: 1,
-          duration: 2000, // Adjust the duration as needed
+          duration: 5000, // Adjust the duration as needed
           easing: Easing.linear,
           useNativeDriver: false,
         })

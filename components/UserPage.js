@@ -1,13 +1,12 @@
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import React from "react";
-import { Feather } from "@expo/vector-icons";
 import { COLORS } from "../constant";
-
+import MapView, { Marker } from 'react-native-maps';
 
 const UserPage = () => {
   return (
     <View style={{ flex: 1 }}>
-      {/* <ScrollView style={styles.page}> */}
+      <MapView style={{flex: 1}}/>
       <View style={{ flex: 1, justifyContent: "flex-end" }}>
         <View style={styles.usercontainer}>
           <Text style={styles.username}>Jugal Shrestha</Text>
@@ -16,7 +15,7 @@ const UserPage = () => {
           <View style={styles.imageContainer}>
             <Image
               style={styles.img}
-              source={require("../assets/profile.png")}
+              source={require("../assets/pp-photo.png")}
             />
           </View>
         </View>
@@ -27,7 +26,6 @@ const UserPage = () => {
               flexDirection: "row",
               backgroundColor: "#F2F2F2",
               borderRadius: 10,
-              // padding: 10,
             }}
           >
             <View
@@ -94,23 +92,23 @@ const UserPage = () => {
             >
               <Image
                 style={styles.tinyLogo}
-                source={require("../assets/compass.png")}
+                source={require("../assets/star-1.png")}
               />
               <Image
                 style={styles.tinyLogo}
-                source={require("../assets/compass.png")}
+                source={require("../assets/star-1.png")}
               />
               <Image
                 style={styles.tinyLogo}
-                source={require("../assets/compass.png")}
+                source={require("../assets/star-1.png")}
               />
               <Image
                 style={styles.tinyLogo}
-                source={require("../assets/compass.png")}
+                source={require("../assets/star-1.png")}
               />
               <Image
                 style={styles.tinyLogo}
-                source={require("../assets/guide.png")}
+                source={require("../assets/star-2.png")}
               />
             </View>
           </View>
@@ -130,22 +128,14 @@ const UserPage = () => {
 
 const styles = StyleSheet.create({
   tinyLogo: {
-    width: 50,
-    height: 50,
+    width: 30,
+    height: 30,
   },
   page: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
-  // toursRow: {
-  //   display: "flex",
-  //   flexDirection: "row",
-  //   justifyContent: "space-between",
-  //   backgroundColor: "#d9d9d9",
-  //   height: 80,
-  //   borderRadius: 20,
-  // },
   headerinfo: {
     display: "flex",
     flexDirection: "column",
@@ -172,7 +162,6 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginLeft: 15,
     marginRight: 15,
-    // backgroundColor: COLORS.n1,
     backgroundColor: "#D9D9D9",
   },
   username: {
@@ -188,7 +177,6 @@ const styles = StyleSheet.create({
   },
   infocontainer: {
     paddingLeft: 15,
-    // marginTop:30,
     marginLeft: 15,
     marginRight: 15,
     color: "#716969",
@@ -196,13 +184,12 @@ const styles = StyleSheet.create({
   },
   infodata: {
     paddingLeft: 15,
-    // paddingTop:5,
     marginLeft: 15,
     marginRight: 15,
     color: "black",
-    fontSize: 23,
+    fontSize: 18,
+    fontWeight: "bold",
   },
-  // New styles for image container
   imageContainer: {
     flexDirection: "row",
     justifyContent: "flex-end",
@@ -216,8 +203,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   settings: {
-    flexDirection: "row", // Set flexDirection to 'row'
-    alignItems: "center", // Align items in the center vertically
+    flexDirection: "row",
+    alignItems: "center",
     paddingLeft: 15,
     marginLeft: 15,
     paddingTop: 25,
@@ -225,7 +212,7 @@ const styles = StyleSheet.create({
   img2: {
     height: 30,
     width: 25,
-    marginRight: 8, // Add some margin between the image and text
+    marginRight: 8,
   },
   infodata2: {
     color: "black",
@@ -235,7 +222,7 @@ const styles = StyleSheet.create({
   img3: {
     height: 20,
     width: 25,
-    marginRight: 8, // Add some margin between the image and text
+    marginRight: 8,
   },
   cont1: {
     paddingTop: 25,
