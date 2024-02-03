@@ -1,8 +1,9 @@
-import GuidePage from "./GuidePage";
-import MapPage from "./MapPage";
-import Advertisements from "./Advertisements";
-import UserPage from "./UserPage";
-import LoginScreen from "./LoginScreen";
+import GuidePage from "./map-page/GuidePage";
+import MapPage from "./map-page/MapPage";
+import ExplorePage from "./explore-page/ExplorePage";
+import UserPage from "./profile-page/UserPage";
+import LoginScreen from "./login-page/LoginScreen";
 import Sos from "./Sos";
+import HomePage from "./home-page/HomePage";
 
-export {MapPage, Advertisements , UserPage, GuidePage, LoginScreen, Sos}
+export {MapPage, ExplorePage , UserPage, GuidePage, HomePage, LoginScreen, Sos}

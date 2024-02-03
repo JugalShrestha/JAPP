@@ -46,20 +46,14 @@ const Sos = () => {
 
   return (
     <>
-      <View style={styles.no1}>
-        <Image style={styles.set} source={require("./settingsos.png")} />
-      </View>
+      <View style={styles.no1}></View>
       <View style={styles.container}>
         <TouchableOpacity style={styles.circle}>
           <Text style={styles.SOStext}>SOS</Text>
         </TouchableOpacity>
         <View style={styles.box}>
-          <TouchableOpacity onPress={()=>handleCallPress()}  style={styles.circle1}>
-            <Image style={styles.img1} source={require("./sosambulance.png")} />
-          </TouchableOpacity>
-          <View style={styles.circle2}>
-            <Image style={styles.img2} source={require("./sospolice.png")} />
-          </View>
+          <TouchableOpacity onPress={()=>handleCallPress()}  style={styles.circle1}></TouchableOpacity>
+          <View style={styles.circle2}></View>
         </View>
         <TouchableOpacity onPress={handleEmergency} style={styles.ec}>
           <Text style={styles.ectext}>Emergency Contact</Text>

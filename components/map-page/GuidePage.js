@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { COLORS } from '../constant'
+import { COLORS } from '../../constant'
 import { Image } from 'react-native-elements'
 
 const GuidePage = () => {
@@ -18,7 +18,7 @@ const GuidePage = () => {
                 <View><Text style={styles.GuideName}>Pratyoosh Shrestha</Text></View>
                 <View style={styles.GuideId}><Text>ID: G101232</Text></View>
             </View>
-            <View style={styles.GuidePhoto}><Image style={{width: "100%",height: "100%",objectFit:'cover',borderRadius:25}} source={require("../assets/random-person-image.jpg")}/></View>
+            <View style={styles.GuidePhoto}><Image style={{width: "100%",height: "100%",objectFit:'cover',borderRadius:25}} source={require("../../assets/random-person-image.jpg")}/></View>
         </View>
         <View style={{flexDirection:"row",alignItems:"center", justifyContent: "space-between",borderRadius:25}}>
             <Text style={{fontSize: 20,fontWeight:"bold", backgroundColor:COLORS.s2,padding:20,borderRadius:25}}>Total Tourists Guided</Text>
@@ -35,23 +35,23 @@ const GuidePage = () => {
             >
               <Image
                 style={styles.tinyLogo}
-                source={require("../assets/star-1.png")}
+                source={require("../../assets/star-1.png")}
               />
               <Image
                 style={styles.tinyLogo}
-                source={require("../assets/star-1.png")}
+                source={require("../../assets/star-1.png")}
               />
               <Image
                 style={styles.tinyLogo}
-                source={require("../assets/star-1.png")}
+                source={require("../../assets/star-1.png")}
               />
               <Image
                 style={styles.tinyLogo}
-                source={require("../assets/star-1.png")}
+                source={require("../../assets/star-1.png")}
               />
               <Image
                 style={styles.tinyLogo}
-                source={require("../assets/star-2.png")}
+                source={require("../../assets/star-2.png")}
               />
             </View> 
         </View>

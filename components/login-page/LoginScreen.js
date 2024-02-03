@@ -1,37 +1,49 @@
 // LoginScreen.js
 import React, { useEffect, useState } from "react";
 import { View, TextInput, Button, StyleSheet, Modal, Text, TouchableOpacity } from "react-native";
-import { COLORS } from "../constant";
+import { COLORS } from "../../constant";
 import { Image } from "react-native-elements";
-const LoginScreen = ({ setIsLoggedIn }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+import { useNavigation } from "@react-navigation/native";
+import { FIREBASE_AUTH} from "../../firebaseConfig";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-  const handleLogin = () => {
-    if (username === "admin" && password === "admin") {
-      alert("Login successful!");
-      setIsLoggedIn(true);
-    } else {
-      alert("Invalid username or password");
+const LoginScreen = ({ setIsLoggedIn }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  
+  const navigation = useNavigation();
+
+  const auth = FIREBASE_AUTH;
+  
+  const handleLogin = async () => {
+    try{
+      const response = await signInWithEmailAndPassword(auth,email,password);
+      console.log(response);
+      alert("Logged in!"); 
+    }
+    catch(error){
+      alert("Wrong Credentials!");
     }
   };
 
   return (
     <>
       <View style={styles.modalContainer}>
-        <Image source={require("../assets/demologo.png")} style={{width:300,height:220}}/>
+        <Image source={require("../../assets/demologo.png")} style={{width:300,height:220}}/>
         <View style={styles.container}>
           <TextInput
-            placeholder="Username"
-            value={username}
-            onChangeText={(text) => setUsername(text)}
+            placeholder="email"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
             style={styles.input}
+            autoCapitalize="none"
           />
           <TextInput
             placeholder="Password"
             value={password}
             onChangeText={(text) => setPassword(text)}
             secureTextEntry
+            autoCapitalize="none"
             style={styles.input}
           />
           <View style={{flexDirection: "row",gap:10,alignItems:"center",justifyContent:"center"}}>
