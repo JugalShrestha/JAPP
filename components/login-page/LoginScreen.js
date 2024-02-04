@@ -18,7 +18,6 @@ const LoginScreen = ({ setIsLoggedIn }) => {
   const handleLogin = async () => {
     try{
       const response = await signInWithEmailAndPassword(auth,email,password);
-      console.log(response);
       alert("Logged in!"); 
     }
     catch(error){
@@ -47,10 +46,13 @@ const LoginScreen = ({ setIsLoggedIn }) => {
             style={styles.input}
           />
           <View style={{flexDirection: "row",gap:10,alignItems:"center",justifyContent:"center"}}>
-            <Text style={{}}>Don't have an account?</Text><Text style={{padding:15,backgroundColor:COLORS.s2,borderRadius:25}}>Sign up!</Text>
+            <Text style={{}}>Don't have an account?</Text>
+            <Button title="Sign up!"  color={COLORS.s1} onPress={()=>{navigation.navigate("signUp")}}/>
           </View>
         </View>
-          <TouchableOpacity style={{width: "80%",}} onPress={handleLogin}><Text style={{padding:15,backgroundColor:COLORS.n1,borderRadius:20,fontSize:15,textTransform:"uppercase",fontWeight:"bold",color:COLORS.p1,paddingLeft:25,paddingRight:25,alignSelf:"flex-end"}}>Login</Text></TouchableOpacity>
+          <TouchableOpacity style={{width: "80%",}} onPress={handleLogin}>
+            <Text style={{padding:15,backgroundColor:COLORS.n1,borderRadius:20,fontSize:15,textTransform:"uppercase",fontWeight:"bold",color:COLORS.p1,paddingLeft:25,paddingRight:25,alignSelf:"flex-end"}}>Login</Text>
+          </TouchableOpacity>
       </View>
     </>
   );

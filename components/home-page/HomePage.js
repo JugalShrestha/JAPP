@@ -37,7 +37,7 @@ const HomePage = () => {
             backgroundColor: COLORS.p1,
             borderTopWidth: 1,
             borderTopColor: COLORS.p2,
-            height:70,
+            height:50,
         },
         tabBarIcon: ({ focused })=>{
             let iconName;

@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { LoginScreen, HomePage } from './components';
+import { LoginScreen, HomePage, SignUpPage } from './components';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './firebaseConfig';
@@ -27,6 +27,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="login" screenOptions={{headerShown: false,}}>
           <Stack.Screen name="login" component={LoginScreen}/>
+          <Stack.Screen name="signUp" component={SignUpPage}/>
         </Stack.Navigator>
       </NavigationContainer>
     }

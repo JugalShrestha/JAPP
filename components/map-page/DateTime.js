@@ -3,9 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import DatePicker from '@react-native-community/datetimepicker';
 import { COLORS } from '../../constant';
 
-const DateTime = ({setDateTimeConfirm,dateTimeConfirm}) => {
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState("");
+const DateTime = ({setDateTimeConfirm,dateTimeConfirm,date,time,setDate,setTime}) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [dateConfirm, setDateConfirm] = useState(false);
